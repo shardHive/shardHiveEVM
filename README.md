@@ -6,5 +6,6 @@ Input output functionality for connecting decentralized object storage from The 
 
 <p align="center">
   <h3>The first stable build of The shardHive Network has been live for 7 days 11 hours</h3>
+  <p4>This is a raspberry pi helper node currently hosting encrypted shards for the first round of testing of The shardHive Network</p>
   <img src="https://shardhive.com/wp-content/uploads/2022/07/shardHiveHelperNodeOneWeek.png">
 </p>
