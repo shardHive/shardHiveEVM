@@ -86,7 +86,7 @@ def sendAltCoin(fromAddress, fromPkey, toAddress, contractAddress, amount):
 		toAddress,
 		oneToken*amount,
 		).buildTransaction({
-		'chainId': 3,
+		'chainId': 3, # for mainnet Ethereum transactions change this to 1.
 		'gas': 100000,
 		'maxFeePerGas': web3.toWei('2', 'gwei'),
 		'maxPriorityFeePerGas': web3.toWei('1', 'gwei'),
@@ -113,3 +113,5 @@ def sendAltCoin(fromAddress, fromPkey, toAddress, contractAddress, amount):
 		print(e)
 
 	return contractTxn
+
+
