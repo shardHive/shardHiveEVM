@@ -1,11 +1,29 @@
-# IO
-Input output functionality for connecting decentralized object storage from The shardHive Network with shardhive.com
+
+# shardHive Technology Python3 EVM library
+
+Documentation for the shardHiveEVM python library [shardHiveEVM.py](shardHiveEVM.py) simple functions for transferring ETH and ERC-20 tokens 
+
+
+#### Import (earlier version) of the shardHive EVM library
+>> from shardHiveEVM import sendEther, sendAltCoin
+
+
+
+
+#### Send Ether
+>> ex1_sendTest = sendEther(fromPublicKey, fromPrivateKey, toPublicKey, amount)
+
+
+
+
+### Send Alt Coin
+>> ex2_sendAltCoin = sendAltCoin(fromPublicKey, fromPrivateKey, toPublicKey, altCoinAddress, Amount)
+
 
 
 
 
 <p align="center">
-  <h3>The first stable build of The shardHive Network has been live for 7 days 11 hours</h3>
-  <p4>This is a raspberry pi helper node currently hosting encrypted shards for the first round of testing of The shardHive Network</p>
-  <img src="https://shardhive.com/wp-content/uploads/2022/07/shardHiveHelperNodeOneWeek.png">
+  <img src="https://shardhive.com/wp-content/uploads/2022/07/logo2-e1658041606895.png"/>
 </p>
+
