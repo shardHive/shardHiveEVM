@@ -10,4 +10,4 @@ from shardHiveEVM import sendEther, sendAltCoin
 
 sendEthTest = sendEther(fromPublicKey, fromPrivateKey, toPublicKey, amount)
 
-sendAltCoin = sendAltCoin(fromPublicKey, fromPrivateKey, toPublicKey, altCoinAddress, Amount)
+sendAltCoin = sendAltCoin(fromPublicKey, fromPrivateKey, toPublicKey, altCoinAddress, amount)
