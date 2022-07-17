@@ -1,22 +1,21 @@
 
 # shardHive Technology Python3 EVM library
 
-Documentation for the shardHiveEVM python library [shardHiveEVM.py](shardHiveEVM.py) simple functions for transferring ETH and ERC-20 tokens 
+#### First draft of documentation for the shardHiveEVM python library [shardHiveEVM.py](shardHiveEVM.py)
 
 
-#### Import (earlier version) of the shardHive EVM library
+
+
+##### import simple functions for transferring ETH and ERC-20 tokens 
 >> from shardHiveEVM import sendEther, sendAltCoin
 
-
-
-
-#### Send Ether
+##### Send Ether
 >> ex1_sendTest = sendEther(fromPublicKey, fromPrivateKey, toPublicKey, amount)
 
 
 
 
-### Send Alt Coin
+##### Send Alt Coin
 >> ex2_sendAltCoin = sendAltCoin(fromPublicKey, fromPrivateKey, toPublicKey, altCoinAddress, Amount)
 
 
