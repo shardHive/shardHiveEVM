@@ -1,4 +1,4 @@
-# python functions for easily transferring Ether and ERC-20 alt coins
+## python functions for easily transferring Ether and ERC-20 alt coins
 
 
 
@@ -6,18 +6,18 @@
 
 
 
-## Import (earlier version) of the shardHive EVM library
-#### from shardHiveEVM import sendEther, sendAltCoin
+#### Import (earlier version) of the shardHive EVM library
+>> from shardHiveEVM import sendEther, sendAltCoin
 
 
-## Send Ether
-#### ex1_sendTest = sendEther(fromPublicKey, fromPrivateKey, toPublicKey, amount)
+#### Send Ether
+>> ex1_sendTest = sendEther(fromPublicKey, fromPrivateKey, toPublicKey, amount)
 
 
 
 
-## Send Alt Coin
-#### ex2_sendAltCoin = sendAltCoin(fromPublicKey, fromPrivateKey, toPublicKey, altCoinAddress, Amount)
+### Send Alt Coin
+>> ex2_sendAltCoin = sendAltCoin(fromPublicKey, fromPrivateKey, toPublicKey, altCoinAddress, Amount)
 
 
 
