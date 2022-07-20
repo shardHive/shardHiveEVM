@@ -2,7 +2,7 @@
 
 from web3 import Web3
 import json
-from secrets import infuraUrl
+from privateInfo import infuraUrl
 import time
 
 
