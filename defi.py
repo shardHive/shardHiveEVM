@@ -49,7 +49,7 @@ for sumKey in list(sumDict.keys()):
 print('\nsh0 Address: ' + str(sh0Addr['last']) + '  ETH: ' + str(ro4(sh0EthBal)) + '  sHive: ' + str(ro2(sh0AltBal)))
 print('sh1 Address: ' + str(sh1Addr['last']) + '  ETH: ' + str(ro4(sh1EthBal)) + '  sHive: ' + str(ro2(sh1AltBal)))
 print('sh2 Address: ' + str(sh2Addr['last']) + '  ETH: ' + str(ro4(sh2EthBal)) + '  sHive: ' + str(ro2(sh2AltBal)))
-
+print('\n')
 
 
 sh0dict = {'walletAddress': sh0Pub, 'ethBal': sh0EthBal, 'altContract': shV0002contract, 'shBal': sh0AltBal}
@@ -57,17 +57,26 @@ sh1dict = {'walletAddress': sh1Pub, 'ethBal': sh1EthBal, 'altContract': shV0002c
 sh2dict = {'walletAddress': sh2Pub, 'ethBal': sh2EthBal, 'altContract': shV0002contract, 'shBal': sh2AltBal}
 
 
-# send 100 tokens from shardHive0 to shardHive1 and inverse
+# send 1000 tokens between participants
+s01, s10, s12, s21, s02, s20 = None, None, None, None, None, None
 
-#s01 = sendAltCoin(pubKeys['shardHive1'], pKeys['shardHive1'], pubKeys['jTest'], shV0002contract, 1000000)
-#s10 = sendAltCoin(pubKeys['shardHive1'], pKeys['shardHive1'], pubKeys['shardHive0'], shV0002contract, 100)
+#s01 = sendAltCoin(sh0Pub, pKeys['shardHive0'], sh1Pub, shV0002contract, 1000)
+#s10 = sendAltCoin(sh1Pub, pKeys['shardHive1'], sh0Pub, shV0002contract, 1000)
+s12 = sendAltCoin(sh1Pub, pKeys['shardHive1'], sh2Pub, shV0002contract, 15898000)
+#s21 = sendAltCoin(sh2Pub, pKeys['shardHive2'], sh1Pub, shV0002contract, 1000)
 
-try:    print(s01)
-except: pass
+#s02 = sendAltCoin(sh0Pub, pKeys['shardHive0'], sh2Pub, shV0002contract, 1000)
+#s20 = sendAltCoin(sh2Pub, pKeys['shardHive2'], sh0Pub, shV0002contract, 1000)
 
-try:    print(s10)
-except: pass
 
+transferList = [s01, s10, s12, s21, s02, s20]
+
+for currentTransfer in transferList:
+	if currentTransfer != None:
+		try:    print(currentTransfer)
+		except: pass
+	else:
+		pass
 justTime, justDate = strftime("%X"), strftime("%x")
 
 print("\n\n----------------------------")
