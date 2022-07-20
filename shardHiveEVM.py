@@ -1,12 +1,26 @@
-
+#!/usr/bin/ python3
 
 from web3 import Web3
 import json
-from infuraSecret import secretInfuraUrl
+from secrets import infuraUrl
+import time
 
 
 
-web3 = Web3(Web3.HTTPProvider(secretInfuraUrl))
+#lambda functions for rounding
+ro2, ro4, ro6, ro8 = lambda x : round(x, 2), lambda x : round(x, 4), lambda x : round(x, 6), lambda x : round(x, 8)
+z18 = 1000000000000000000 # 18 zeros
+
+
+
+web3 = Web3(Web3.HTTPProvider(infuraUrl))
+
+
+
+# slice first and last 4 digits of public key
+def getAddrDict(inputAddress):
+	outputDict = {'first': inputAddress[:4], 'last': inputAddress[-4:]}
+	return outputDict
 
 
 
@@ -14,18 +28,49 @@ web3 = Web3(Web3.HTTPProvider(secretInfuraUrl))
 def fetchETHBalance(walletAddress):
 	balanceInWei = web3.eth.getBalance(walletAddress)
 	balanceEth = float(Web3.fromWei(balanceInWei, 'ether'))
-	addressBalance = {'address': walletAddress, 'balanceEth': balanceEth}
+	addressBalance = {'address': walletAddress, 'bal': balanceEth}
 	return addressBalance
+
+
+
+
+
+
+
+
+def fetchAltBalance(walletAddress, contractAddress):
+
+	nonce = web3.eth.getTransactionCount(walletAddress)	
+	EIP20_ABI = json.loads('[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"}]')  # noqa: 501
+	contractObject = web3.eth.contract(address=contractAddress, abi=EIP20_ABI)
+	walletBalance = contractObject.caller.balanceOf(walletAddress)
+
+	balDiv18 = ro8(walletBalance / 1000000000000000000) # 18 zeros
+	return balDiv18
+
+
+
+
+def fetchAltTotalSupply(contractAddress):
+
+	#nonce = web3.eth.getTransactionCount(walletAddress)	
+	EIP20_ABI = json.loads('[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"}]')  # noqa: 501
+	contractObject = web3.eth.contract(address=contractAddress, abi=EIP20_ABI)
+	walletBalance = contractObject.caller.totalSupply()
+	balDiv18 = ro8(walletBalance / 1000000000000000000) # 18 zeros
+	return balDiv18
+
+
 
 
 
 # send Ether
 def sendEther(fromAddress, fromAddresspk, toAddress, etherAmount):
-    walletBalances = {'from0': None, 'from1': None, 'to0': None, 'to1': None}
+	walletBalances = {'from0': None, 'from1': None, 'to0': None, 'to1': None}
 	fetchFrom, fetchTo = fetchETHBalance(fromAddress), fetchETHBalance(toAddress)
 
-    walletBalances['from0'] = fetchFrom
-    walletBalances['to0'] = fetchTo
+	walletBalances['from0'] = fetchFrom
+	walletBalances['to0'] = fetchTo
 
 
 	print("\nWallet balances before sending")
@@ -49,11 +94,8 @@ def sendEther(fromAddress, fromAddresspk, toAddress, etherAmount):
 
 	fetchFrom, fetchTo = fetchETHBalance(fromAddress), fetchETHBalance(toAddress)
 
-    walletBalances['from1'] = fetchFrom
-    walletBalances['to1'] = fetchTo
-
-
-
+	walletBalances['from1'] = fetchFrom
+	walletBalances['to1'] = fetchTo
 
 	print("\nWallet balances after sending")
 	print(fetchFrom)
@@ -79,7 +121,7 @@ def sendAltCoin(fromAddress, fromPkey, toAddress, contractAddress, amount):
 
 	contractObject = web3.eth.contract(address=contractAddress, abi=EIP20_ABI)
 
-	oneToken = 1000000000000000000
+	oneToken = 1000000000000000000 # 18 zeros
 
 	# Build a transaction that invokes this contract's function, called transfer
 	contractTxn = contractObject.functions.transfer(
@@ -96,7 +138,6 @@ def sendAltCoin(fromAddress, fromPkey, toAddress, contractAddress, amount):
 	try:
 		# sign the transaction
 		signed_tx = web3.eth.account.sign_transaction(contractTxn, private_key=fromPkey)
-		print('success signing the transaction')
 	except Exception as e:
 		print('failed signing the transaction')
 		print(e)
@@ -105,13 +146,37 @@ def sendAltCoin(fromAddress, fromPkey, toAddress, contractAddress, amount):
 		# send the transaction
 		tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
 		# get transaction hash
-		print('success sending the transaction')
-		print('Transaction Hash: ' + str(web3.toHex(tx_hash)))
+		txHashHex = str(web3.toHex(tx_hash))
+
+		contractTxn.update({'txHash': txHashHex})
+
 
 	except Exception as e:
 		print('failed sending the transaction')
 		print(e)
 
 	return contractTxn
+
+
+
+def writeJson(jsonOutAddr, jsonData):
+	try:
+		with open(jsonOutAddr, 'w') as fp1: json.dump(jsonData, fp1)
+		functionOutput = ("\nSuccess Creating JSON at: " + str(jsonOutAddr) + "\n")
+
+	except Exception as e:
+		functionOutput = "\nFailed to create JSON. Error msg:\n" + str(e)
+
+	return functionOutput
+
+
+
+
+def readJson(jsonInAddr):
+	with open(jsonInAddr, 'r') as r:
+		jsonOutputDict = json.load(r)
+	return jsonOutputDict
+
+
 
 
