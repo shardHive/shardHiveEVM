@@ -6,11 +6,9 @@ from secrets import infuraUrl
 import time
 
 
-
 #lambda functions for rounding
-ro2, ro4, ro6, ro8 = lambda x : round(x, 2), lambda x : round(x, 4), lambda x : round(x, 6), lambda x : round(x, 8)
+ro1, ro2, ro4, ro6, ro8 = lambda x : round(x, 1), lambda x : round(x, 2), lambda x : round(x, 4), lambda x : round(x, 6), lambda x : round(x, 8)
 z18 = 1000000000000000000 # 18 zeros
-
 
 
 web3 = Web3(Web3.HTTPProvider(infuraUrl))
