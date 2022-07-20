@@ -5,6 +5,7 @@
 
 
 
+Early draft of the [defi.py](defi.py) program. Sample output below
 
 
 <p align="center">
@@ -22,7 +23,6 @@
 
 
 
-[shardHiveEVM.py](shardHiveEVM.py)
 
 
 
