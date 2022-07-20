@@ -1,7 +1,28 @@
 
 # shardHive Technology Python3 EVM library
 
-#### First draft of documentation for the shardHiveEVM python library [shardHiveEVM.py](shardHiveEVM.py)
+
+
+
+
+
+
+<p align="center">
+  <img src="https://github.com/shardHive/shardHiveEVM/blob/main/shardHiveEVM-defi-v002.png"/>
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+[shardHiveEVM.py](shardHiveEVM.py)
 
 
 
