@@ -2,7 +2,7 @@
 #!/usr/bin/python3
 
 from shardHiveEVM import *
-from secrets import pKeys, pubKeys, altCoinAddress
+from privateInfo import pKeys, pubKeys, altCoinAddress
 from datetime import datetime, timedelta, date
 from time import strftime
 import numpy as np
