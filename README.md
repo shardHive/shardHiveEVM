@@ -5,11 +5,11 @@
 
 
 
-Early draft of the [defi.py](defi.py) program. Sample output below
+First draft of the shardHiveEVM [loan.py](loan.py) DeFi protocol. Sample output below
 
 
 <p align="center">
-  <img src="https://github.com/shardHive/shardHiveEVM/blob/main/shardHiveEVM-defi-v002.png"/>
+  <img src="https://shardhive.com/wp-content/uploads/2022/07/shardhive-technology-shardHiveEVM-loan-defi-screenshot.png"/>
 </p>
 
 
