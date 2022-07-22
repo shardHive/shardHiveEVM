@@ -2,7 +2,7 @@
 
 from web3 import Web3
 import json
-from privateInfo import infuraUrl
+from secrets import infuraUrl, pubKeys, pKeys, currentShContract
 import time
 
 
@@ -14,11 +14,17 @@ z18 = 1000000000000000000 # 18 zeros
 web3 = Web3(Web3.HTTPProvider(infuraUrl))
 
 
+# import current shardHive contract and convert into checksum
+shV0002contract = Web3.toChecksumAddress(currentShContract)
 
-# slice first and last 4 digits of public key
-def getAddrDict(inputAddress):
-	outputDict = {'first': inputAddress[:4], 'last': inputAddress[-4:]}
-	return outputDict
+
+# import public keys and convert into checksum format
+sh0Pub, sh1Pub, sh2Pub = Web3.toChecksumAddress(pubKeys['shardHive0']), Web3.toChecksumAddress(pubKeys['shardHive1']), Web3.toChecksumAddress(pubKeys['shardHive2'])
+
+
+# import private keys as variables
+sh0p, sh1p, sh1p = pKeys['shardHive0'], pKeys['shardHive1'], pKeys['shardHive2']
+#sh0p, sh1p, sh2p = Web3.toChecksumAddress(pKeys['shardHive0']), Web3.toChecksumAddress(pKeys['shardHive1']), Web3.toChecksumAddress(pKeys['shardHive2'])
 
 
 
@@ -154,6 +160,18 @@ def sendAltCoin(fromAddress, fromPkey, toAddress, contractAddress, amount):
 		print(e)
 
 	return contractTxn
+
+
+
+
+
+# slice first and last 4 digits of public key
+def getAddrDict(inputAddress):
+	outputDict = {'first': inputAddress[:4], 'last': inputAddress[-4:]}
+	return outputDict
+
+
+
 
 
 
