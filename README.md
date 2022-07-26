@@ -2,6 +2,11 @@
 # shardHive Technology Python3 EVM library
 
 
+## Sample of [defi.py](defi.py) output
+
+<p align="center">
+  <img src="https://shardhive.com/wp-content/uploads/2022/07/shardHive-technology-shardHiveEVM-defi-v002.png"/>
+</p>
 
 
 
