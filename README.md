@@ -5,26 +5,6 @@
 
 
 
-First draft of the shardHiveEVM [loan.py](loan.py) DeFi protocol. Sample output below
-
-
-<p align="center">
-  <img src="https://shardhive.com/wp-content/uploads/2022/07/shardhive-technology-shardHiveEVM-loan-defi-screenshot.png"/>
-</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ##### import simple functions for transferring ETH and ERC-20 tokens 
