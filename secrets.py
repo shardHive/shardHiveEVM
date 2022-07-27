@@ -11,4 +11,6 @@ pubKeys = {'shardHive0': 'pubKey0',
 infuraUrl = 'your ropsten infura URL'
 
 
-currentShContract = 'node-specific shardHive contract address'
+altCoinAddress = 'node-specific shardHive contract address'
+
+currentShContract = altCoinAddress
