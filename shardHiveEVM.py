@@ -23,7 +23,7 @@ sh0Pub, sh1Pub, sh2Pub = Web3.toChecksumAddress(pubKeys['shardHive0']), Web3.toC
 
 
 # import private keys as variables
-sh0p, sh1p, sh1p = pKeys['shardHive0'], pKeys['shardHive1'], pKeys['shardHive2']
+sh0p, sh1p, sh2p = pKeys['shardHive0'], pKeys['shardHive1'], pKeys['shardHive2']
 #sh0p, sh1p, sh2p = Web3.toChecksumAddress(pKeys['shardHive0']), Web3.toChecksumAddress(pKeys['shardHive1']), Web3.toChecksumAddress(pKeys['shardHive2'])
 
 
