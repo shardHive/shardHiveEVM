@@ -16,16 +16,10 @@ ro1, ro2, ro4, ro6, ro8 = lambda x : round(x, 1), lambda x : round(x, 2), lambda
 
 
 justTime, justDate = strftime("%X"), strftime("%x")
-t6="""
-0----------|----------
-///////////|/////////
---  shEVM v0.0.2  --
-///////////|////////
------------|------x
-\n
-Started on: {} at: {}
-\n\n""".format(justDate, justTime)
-print(t6)
+print("\n\n----------------------------")
+print("Started shV002 shEVM Test on: " + str(justDate) + " at: " + str(justTime))
+print("----------------------------\n")
+
 
 
 sh0Pub, sh1Pub, sh2Pub = Web3.toChecksumAddress(pubKeys['shardHive0']), Web3.toChecksumAddress(pubKeys['shardHive1']), Web3.toChecksumAddress(pubKeys['shardHive2'])
@@ -52,16 +46,11 @@ sum01, sum02, sum12, sum012 = sh0Erc20Bal['bal'] + sh1Erc20Bal['bal'], sh0Erc20B
 sumDict = {'s01': sum01, 's02': sum02, 's12': sum12, 's012': sum012}
 
 print("Total Supply: " + str(shV002totalSupply))
-print('\nWallet group ownership')
-for sumKey in list(sumDict.keys()):
-	currentOwnership = ro2(sumDict[sumKey] / shV002totalSupply * 100)
-	print(str(sumKey) + '  ' + str(currentOwnership) + '%')
 
 
 print('\nsh0 Address: ' + str(sh0Addr['last']) + '  ETH: ' + str(ro4(sh0EthBal)) + '  sHive: ' + str(ro2(sh0Erc20Bal['bal'])))
 print('sh1 Address: ' + str(sh1Addr['last']) + '  ETH: ' + str(ro4(sh1EthBal)) + '  sHive: ' + str(ro2(sh1Erc20Bal['bal'])))
 print('sh2 Address: ' + str(sh2Addr['last']) + '  ETH: ' + str(ro4(sh2EthBal)) + '  sHive: ' + str(ro2(sh2Erc20Bal['bal'])))
-print('\n')
 
 
 sh0dict = {'walletAddress': sh0Pub, 'ethBal': sh0EthBal, 'Erc20Contract': shV0002contract, 'shBal': sh0Erc20Bal['bal']}
@@ -81,7 +70,7 @@ shUsers = [sh0dict, sh1dict, sh2dict]
 
 justTime, justDate = strftime("%X"), strftime("%x")
 print("\n\n----------------------------")
-print("Finished shV002 DeFi Test on: " + str(justDate) + " at: " + str(justTime))
+print("Finished shV002 shEVM Test on: " + str(justDate) + " at: " + str(justTime))
 print("----------------------------\n")
 
 
